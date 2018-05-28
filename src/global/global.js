@@ -48,6 +48,7 @@ export default{
   appKey:"72d77b4a",
   secret:"44e7464a4df7443a8798d8c42661c606",
   apiGetWithToken(obj ,url, params = {}) {
+    var self = this
     var temp = url + JSON.stringify(params) + this.secret
     console.log(obj,url,params,temp)
     var token = md5(temp)
@@ -55,7 +56,7 @@ export default{
     params.token = token
     return new Promise((resolve, reject) => {
       // console.log(resolve,reject)
-    axios.get(url, { params })
+    axios.get(self.baseUrl+url, { params })
       .then((res) => {
         console.log(res)
 
@@ -80,7 +81,7 @@ export default{
       });
   });
 },
-baseUrl: 'http://localhost:6000',
+baseUrl: 'http://10.0.0.30:80',
 
   getHttpData: function (data) {
     var temp = ''

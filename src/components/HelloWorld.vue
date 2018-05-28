@@ -85,6 +85,7 @@
 
 <script>
 import md5 from "blueimp-md5"
+// import axios from "axios"
 import global from '../global/global.js'
 export default {
   name: 'HelloWorld',
@@ -95,10 +96,16 @@ export default {
   },
   created(){
     // console.log(md5("aaa"));
+    this.getDefaultUUID()
   },
   methods: {
     getAllCameras(){
-      axios.postHttpDataWithToken(this,'/openapi/service/vss/res/getCamerasEx',{appKey:global.appKey,time:new Date().getTime(),pageNo:1,pageSize:100,opUserUuid:})
+      // axios.postHttpDataWithToken(this,'/openapi/service/vss/res/getCamerasEx',{appkey:global.appKey,time:new Date().getTime(),pageNo:1,pageSize:100,opUserUuid:})
+    },
+    getDefaultUUID(){
+      global.apiGetWithToken(this,'/openapi/service/base/user/getDefaultUuid',{appkey:global.appKey,time:new Date().getTime()}).then(function(res){
+        console.log(res)
+      })
     }
   }
 }
